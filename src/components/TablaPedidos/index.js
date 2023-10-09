@@ -3,7 +3,9 @@ import axios from "axios";
 import "./Tabla.css";
 
 const TablaPedidos = () => {
+
   const [data, setData] = useState([]);
+  
   const [formData, setFormData] = useState({ id: null, name: "" });
   const endpoint = 'http://localhost:3000/Productos/'
 
@@ -11,10 +13,40 @@ const TablaPedidos = () => {
     fetchData();
   }, []);
 
+
+  //
+
+  const [data2, setData2] = useState([]);
+
+  const [Search, setSearch] = useState('');
+
+  const handleChange = e => {
+    setSearch(e.target.value);
+    buscar(e.target.value);
+  };
+
+  const buscar = (busqueda) => {
+    var resultados = data2.filter((e) => {
+      if (e.name.toString().toLowerCase().includes(busqueda.toLowerCase()) 
+      || e.subname.toString().toLowerCase().includes(busqueda.toLowerCase())
+      || e.price.toString().toLowerCase().includes(busqueda.toLowerCase())) 
+
+      return e
+
+    })
+
+    setData(resultados)
+
+  }
+
+
+  //
+
   const fetchData = async () => {
     try {
       const response = await axios.get(endpoint);
       setData(response.data);
+      setData2(response.data);
     } catch (error) {
       console.error("Error al obtener datos:", error);
     }
@@ -29,7 +61,7 @@ const TablaPedidos = () => {
     try {
       if (formData.id) {
         // Actualizar datos si formData tiene un ID
-        await axios.put(endpoint+`${formData.id}`, formData);
+        await axios.put(endpoint + `${formData.id}`, formData);
       } else {
         // Crear nuevos datos si formData no tiene un ID
         await axios.post(endpoint, formData);
@@ -51,7 +83,7 @@ const TablaPedidos = () => {
   const handleDelete = async (id) => {
     try {
       // Eliminar datos según el ID
-      await axios.delete(endpoint+`${id}`);
+      await axios.delete(endpoint + `${id}`);
       // Volver a cargar los datos después de la operación
       fetchData();
     } catch (error) {
@@ -62,7 +94,12 @@ const TablaPedidos = () => {
   return (
     <div>
       <label>Buscar: </label>
-      <input></input>
+      <input
+        type="text"
+        value={Search}
+        placeholder="Buscar"
+        onChange={handleChange}
+      />
 
       <form onSubmit={handleSubmit}>
         <input
@@ -90,7 +127,7 @@ const TablaPedidos = () => {
               <td>{item.id}</td>
               <td>{item.name}</td>
               <td>{item.price}</td>
-              <td>{item.price}</td>
+              <td>{item.subname}</td>
               <td>
                 <button onClick={() => handleEdit(item)}>Modificar</button>
                 <button onClick={() => handleDelete(item.id)}>Eliminar</button>
