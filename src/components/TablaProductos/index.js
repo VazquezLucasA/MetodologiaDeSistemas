@@ -4,8 +4,15 @@ import "./Tabla.css";
 
 const TablaProducto = () => {
   const [data, setData] = useState([]);
-  const [formData, setFormData] = useState({ id: null, name: "" });
-  const endpoint = 'http://localhost:3000/Productos/'
+
+  const [formData, setFormData] = useState({
+    id: null,
+    name: "",
+    detalles: "",
+    price: ""
+  });
+
+  const endpoint = "http://localhost:3000/Productos/";
 
   useEffect(() => {
     fetchData();
@@ -23,41 +30,58 @@ const TablaProducto = () => {
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (formData.id) {
         // Actualizar datos si formData tiene un ID
-        await axios.put(endpoint+`${formData.id}`, formData);
+        await axios.put(endpoint + `${formData.id}`, formData);
       } else {
         // Crear nuevos datos si formData no tiene un ID
         await axios.post(endpoint, formData);
       }
       // Limpiar el formulario después de la operación
-      setFormData({ id: null, name: "" });
+      setFormData({
+        id: null,
+        name: "",
+        detalles: "",
+        price: ""
+      });
       // Volver a cargar los datos después de la operación
       fetchData();
     } catch (error) {
       console.error("Error al enviar datos:", error);
     }
   };
+  
 
   const handleEdit = (item) => {
     // Rellenar el formulario con los datos del item seleccionado para la modificación
-    setFormData({ id: item.id, name: item.name });
+    setFormData({ id: item.id, name: item.name, detalles: item.detalles, price: item.price});
   };
 
   const handleDelete = async (id) => {
     try {
       // Eliminar datos según el ID
-      await axios.delete(endpoint+`${id}`);
+      await axios.delete(endpoint + `${id}`);
       // Volver a cargar los datos después de la operación
       fetchData();
     } catch (error) {
       console.error("Error al eliminar datos:", error);
     }
   };
+
+  const handleCancel = () => {
+    // Limpiar el formulario y salir del modo de edición
+    setFormData({
+      id: null,
+      name: "",
+      detalles: "",
+      price: ""
+    });
+  };
+  
 
   return (
     <div>
@@ -69,13 +93,29 @@ const TablaProducto = () => {
           value={formData.name}
           onChange={handleInputChange}
         />
+        <input
+          type="text"
+          name="detalles"
+          placeholder="detalles"
+          value={formData.detalles}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="price"
+          placeholder="precio"
+          value={formData.price}
+          onChange={handleInputChange}
+        />
         <button type="submit">{formData.id ? "Modificar" : "Agregar"}</button>
       </form>
+
       <table className="table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Nombre</th>
+            <th>Detalles</th>
             <th>Precio</th>
             <th>Acciones</th>
           </tr>
@@ -85,6 +125,7 @@ const TablaProducto = () => {
             <tr key={item.id}>
               <td>{item.id}</td>
               <td>{item.name}</td>
+              <td>{item.detalles}</td>
               <td>{item.price}</td>
               <td>
                 <button onClick={() => handleEdit(item)}>Modificar</button>
@@ -94,6 +135,10 @@ const TablaProducto = () => {
           ))}
         </tbody>
       </table>
+
+      <button type="button" onClick={handleCancel}>
+            Cancelar
+          </button>
     </div>
   );
 };

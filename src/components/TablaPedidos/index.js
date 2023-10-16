@@ -7,7 +7,7 @@ const TablaPedidos = () => {
   const [data, setData] = useState([]);
   
   const [formData, setFormData] = useState({ id: null, name: "" });
-  const endpoint = 'http://localhost:3000/Productos/'
+  const endpoint = 'http://localhost:3000/Pedidos/'
 
   useEffect(() => {
     fetchData();
@@ -27,20 +27,19 @@ const TablaPedidos = () => {
 
   const buscar = (busqueda) => {
     var resultados = data2.filter((e) => {
-      if (e.name.toString().toLowerCase().includes(busqueda.toLowerCase()) 
-      || e.subname.toString().toLowerCase().includes(busqueda.toLowerCase())
-      || e.price.toString().toLowerCase().includes(busqueda.toLowerCase())) 
+      const name = e.name?.toString().toLowerCase() || '';
+      const subname = e.detalle?.toString().toLowerCase() || '';
+      const price = e.monto?.toString().toLowerCase() || '';
+      return (
+        name.includes(busqueda.toLowerCase()) ||
+        subname.includes(busqueda.toLowerCase()) ||
+        price.includes(busqueda.toLowerCase())
+      );
+    });
+  
+    setData(resultados);
+  };
 
-      return e
-
-    })
-
-    setData(resultados)
-
-  }
-
-
-  //
 
   const fetchData = async () => {
     try {
@@ -126,8 +125,8 @@ const TablaPedidos = () => {
             <tr key={item.id}>
               <td>{item.id}</td>
               <td>{item.name}</td>
-              <td>{item.price}</td>
-              <td>{item.subname}</td>
+              <td>{item.detalle}</td>
+              <td>{item.monto}</td>
               <td>
                 <button onClick={() => handleEdit(item)}>Modificar</button>
                 <button onClick={() => handleDelete(item.id)}>Eliminar</button>
