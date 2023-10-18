@@ -2,3 +2,11 @@ table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
   }
+td.entregado-verde {
+    background-color: green;
+}
+  
+td.entregado-rojo {
+    background-color: red;
+}
+  

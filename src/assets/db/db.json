@@ -1,0 +1,141 @@
+{
+  "Usuarios": [
+    {
+      "id": 1,
+      "username": "Lucas",
+      "password": "123"
+    },
+    {
+      "username": "Lucass",
+      "password": "1234",
+      "id": 2
+    },
+    {
+      "username": "Juan",
+      "password": "123",
+      "id": 3
+    }
+  ],
+  "Productos": [
+    {
+      "id": 1,
+      "name": "Photocard",
+      "detalles": "Foto de un coreano ",
+      "price": "150"
+    },
+    {
+      "id": 2,
+      "name": "Album",
+      "detalles": "album super bueno",
+      "price": "50"
+    },
+    {
+      "id": 3,
+      "name": "CD album 1",
+      "detalles": "CD Increible",
+      "price": "25"
+    }
+  ],
+  "Pedidos": [
+    {
+      "clienteId": 3,
+      "productos": [
+        {
+          "id": 2,
+          "name": "Album",
+          "detalles": "album super bueno",
+          "price": "50"
+        }
+      ],
+      "entregado": true,
+      "id": 3
+    },
+    {
+      "clienteId": 5,
+      "productos": [
+        {
+          "id": 1,
+          "name": "Photocard",
+          "detalles": "Foto de un coreano ",
+          "price": "153"
+        },
+        {
+          "id": 2,
+          "name": "Album",
+          "detalles": "album super bueno",
+          "price": "50"
+        }
+      ],
+      "entregado": false,
+      "id": 4
+    },
+    {
+      "clienteId": 1,
+      "productos": [
+        {
+          "id": 1,
+          "name": "Photocard",
+          "detalles": "Foto de un coreano ",
+          "price": "150"
+        }
+      ],
+      "entregado": false,
+      "id": 5
+    },
+    {
+      "clienteId": 1,
+      "productos": [
+        {
+          "id": 1,
+          "name": "Photocard",
+          "detalles": "Foto de un coreano ",
+          "price": "150"
+        }
+      ],
+      "entregado": true,
+      "id": 6
+    }
+  ],
+  "Clientes": [
+    {
+      "id": 1,
+      "name": "Rocio Dora",
+      "dni": "43556565",
+      "phoneNumber": "381555555",
+      "instagramUser": "rodorado",
+      "address": "alderetes 111"
+    },
+    {
+      "id": 2,
+      "name": "Lucas Vaz",
+      "dni": "433333333",
+      "phoneNumber": "381544444",
+      "instagramUser": "Lucas",
+      "address": "Direc"
+    },
+    {
+      "id": 3,
+      "name": "Juan",
+      "dni": "44444444444",
+      "phoneNumber": "38147777777",
+      "instagramUser": "juan",
+      "address": "mendoza 121"
+    },
+    {
+      "id": 4,
+      "name": "miguel",
+      "dni": "44477777",
+      "phoneNumber": "3811111111",
+      "instagramUser": "mig",
+      "address": "riv adavia 123"
+    },
+    {
+      "id": 5,
+      "name": "Arturo",
+      "dni": "23555544",
+      "phoneNumber": "381789456",
+      "instagramUser": "Arturo",
+      "address": "Casa de arturo"
+    }
+  ]
+}

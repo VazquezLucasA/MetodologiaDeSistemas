@@ -1,92 +1,95 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Tabla.css";
+import { useNavigate } from "react-router-dom";
 
 const TablaPedidos = () => {
-
+  const Navigate = useNavigate();
   const [data, setData] = useState([]);
-  
-  const [formData, setFormData] = useState({ id: null, name: "" });
-  const endpoint = 'http://localhost:3000/Pedidos/'
+  const endpoint = "http://localhost:3000/Pedidos/";
+  const [data2, setData2] = useState([]);
+  const [Search, setSearch] = useState("");
 
   useEffect(() => {
     fetchData();
   }, []);
 
-
-  //
-
-  const [data2, setData2] = useState([]);
-
-  const [Search, setSearch] = useState('');
-
-  const handleChange = e => {
+  const handleChange = (e) => {
     setSearch(e.target.value);
     buscar(e.target.value);
   };
 
   const buscar = (busqueda) => {
-    var resultados = data2.filter((e) => {
-      const name = e.name?.toString().toLowerCase() || '';
-      const subname = e.detalle?.toString().toLowerCase() || '';
-      const price = e.monto?.toString().toLowerCase() || '';
+    var resultados = data2.filter((pedido) => {
+      const clienteNombre = pedido.cliente?.toLowerCase() || "";
+      const productosNombres = pedido.productos?.toLowerCase() || "";
+      const monto = pedido.monto?.toLowerCase() || "";
+
       return (
-        name.includes(busqueda.toLowerCase()) ||
-        subname.includes(busqueda.toLowerCase()) ||
-        price.includes(busqueda.toLowerCase())
+        clienteNombre.includes(busqueda.toLowerCase()) ||
+        productosNombres.includes(busqueda.toLowerCase()) ||
+        monto.includes(busqueda.toLowerCase())
       );
     });
-  
     setData(resultados);
   };
-
 
   const fetchData = async () => {
     try {
       const response = await axios.get(endpoint);
-      setData(response.data);
-      setData2(response.data);
+      const pedidosWithClienteAndProductos = await Promise.all(
+        response.data.map(async (pedido) => {
+          const clienteResponse = await axios.get(
+            `http://localhost:3000/Clientes/${pedido.clienteId}`
+          );
+          const productosResponse = await Promise.all(
+            pedido.productos.map(async (producto) => {
+              const productoInfo = await axios.get(
+                `http://localhost:3000/Productos/${producto.id}`
+              );
+              return productoInfo.data;
+            })
+          );
+          return {
+            ...pedido,
+            cliente: clienteResponse.data.name,
+            productos: productosResponse
+              .map((producto) => producto.name)
+              .join(", "),
+            monto: productosResponse
+              .reduce(
+                (total, producto) => total + parseFloat(producto.price),
+                0
+              )
+              .toFixed(2),
+          };
+        })
+      );
+      setData(pedidosWithClienteAndProductos);
+      setData2(pedidosWithClienteAndProductos);
     } catch (error) {
       console.error("Error al obtener datos:", error);
     }
   };
 
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleEliminarPedido = async (id) => {
     try {
-      if (formData.id) {
-        // Actualizar datos si formData tiene un ID
-        await axios.put(endpoint + `${formData.id}`, formData);
-      } else {
-        // Crear nuevos datos si formData no tiene un ID
-        await axios.post(endpoint, formData);
-      }
-      // Limpiar el formulario después de la operación
-      setFormData({ id: null, name: "" });
-      // Volver a cargar los datos después de la operación
+      await axios.delete(`${endpoint}${id}`);
       fetchData();
     } catch (error) {
-      console.error("Error al enviar datos:", error);
+      console.error("Error al eliminar pedido:", error);
     }
   };
 
-  const handleEdit = (item) => {
-    // Rellenar el formulario con los datos del item seleccionado para la modificación
-    setFormData({ id: item.id, name: item.name });
-  };
-
-  const handleDelete = async (id) => {
+  const handleMarcarEntregado = async (id) => {
     try {
-      // Eliminar datos según el ID
-      await axios.delete(endpoint + `${id}`);
-      // Volver a cargar los datos después de la operación
+      const response = await axios.get(`${endpoint}${id}`);
+      const pedido = response.data;
+      pedido.entregado = true;
+      await axios.put(`${endpoint}${id}`, pedido);
       fetchData();
     } catch (error) {
-      console.error("Error al eliminar datos:", error);
+      console.error("Error al marcar como entregado:", error);
     }
   };
 
@@ -99,17 +102,6 @@ const TablaPedidos = () => {
         placeholder="Buscar"
         onChange={handleChange}
       />
-
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          value={formData.name}
-          onChange={handleInputChange}
-        />
-        <button type="submit">{formData.id ? "Modificar" : "Agregar"}</button>
-      </form>
       <table className="table">
         <thead>
           <tr>
@@ -118,23 +110,41 @@ const TablaPedidos = () => {
             <th>Detalle</th>
             <th>Monto</th>
             <th>Estado</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item) => (
             <tr key={item.id}>
               <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.detalle}</td>
+              <td>{item.cliente}</td>
+              <td>{item.productos}</td>
               <td>{item.monto}</td>
+              <td
+                className={
+                  item.entregado ? "entregado-verde" : "entregado-rojo"
+                }
+              >
+                {item.entregado ? "Entregado" : "Pendiente"}
+              </td>
               <td>
-                <button onClick={() => handleEdit(item)}>Modificar</button>
-                <button onClick={() => handleDelete(item.id)}>Eliminar</button>
+                <button onClick={() => handleEliminarPedido(item.id)}>
+                  Eliminar
+                </button>
+                {!item.entregado && (
+                  <button onClick={() => handleMarcarEntregado(item.id)}>
+                    Entregado
+                  </button>
+                )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <button type="button" onClick={() => Navigate("/Pedidos/Agregar")}>
+        Agregar Pedidos
+      </button>
     </div>
   );
 };

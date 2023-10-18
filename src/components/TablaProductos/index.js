@@ -9,7 +9,7 @@ const TablaProducto = () => {
     id: null,
     name: "",
     detalles: "",
-    price: ""
+    price: "",
   });
 
   const endpoint = "http://localhost:3000/Productos/";
@@ -30,42 +30,39 @@ const TablaProducto = () => {
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (formData.id) {
-        // Actualizar datos si formData tiene un ID
         await axios.put(endpoint + `${formData.id}`, formData);
       } else {
-        // Crear nuevos datos si formData no tiene un ID
         await axios.post(endpoint, formData);
       }
-      // Limpiar el formulario después de la operación
       setFormData({
         id: null,
         name: "",
         detalles: "",
-        price: ""
+        price: "",
       });
-      // Volver a cargar los datos después de la operación
       fetchData();
     } catch (error) {
       console.error("Error al enviar datos:", error);
     }
   };
-  
 
   const handleEdit = (item) => {
-    // Rellenar el formulario con los datos del item seleccionado para la modificación
-    setFormData({ id: item.id, name: item.name, detalles: item.detalles, price: item.price});
+    setFormData({
+      id: item.id,
+      name: item.name,
+      detalles: item.detalles,
+      price: item.price,
+    });
   };
 
   const handleDelete = async (id) => {
     try {
-      // Eliminar datos según el ID
       await axios.delete(endpoint + `${id}`);
-      // Volver a cargar los datos después de la operación
       fetchData();
     } catch (error) {
       console.error("Error al eliminar datos:", error);
@@ -73,15 +70,13 @@ const TablaProducto = () => {
   };
 
   const handleCancel = () => {
-    // Limpiar el formulario y salir del modo de edición
     setFormData({
       id: null,
       name: "",
       detalles: "",
-      price: ""
+      price: "",
     });
   };
-  
 
   return (
     <div>
@@ -135,10 +130,9 @@ const TablaProducto = () => {
           ))}
         </tbody>
       </table>
-
       <button type="button" onClick={handleCancel}>
-            Cancelar
-          </button>
+        Cancelar
+      </button>
     </div>
   );
 };
