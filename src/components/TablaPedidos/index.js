@@ -95,7 +95,7 @@ const TablaPedidos = () => {
 
   return (
     <div>
-      <label>Buscar: </label>
+
       <input
         type="text"
         value={Search}

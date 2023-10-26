@@ -19,37 +19,24 @@
   "Productos": [
     {
       "id": 1,
-      "name": "Photocard",
-      "detalles": "Foto de un coreano ",
-      "price": "150"
+      "name": "Album V Layover Random",
+      "detalles": "Random",
+      "price": "25000"
     },
     {
       "id": 2,
-      "name": "Album",
-      "detalles": "album super bueno",
-      "price": "50"
+      "name": "Album JK Golden Random",
+      "detalles": "Random",
+      "price": "30000"
     },
     {
       "id": 3,
-      "name": "CD album 1",
-      "detalles": "CD Increible",
-      "price": "25"
+      "name": "SET JK Golden con POB",
+      "detalles": "SET 4 version completo",
+      "price": "85000"
     }
   ],
   "Pedidos": [
-    {
-      "clienteId": 3,
-      "productos": [
-        {
-          "id": 2,
-          "name": "Album",
-          "detalles": "album super bueno",
-          "price": "50"
-        }
-      ],
-      "entregado": true,
-      "id": 3
-    },
     {
       "clienteId": 5,
       "productos": [
@@ -66,7 +53,7 @@
           "price": "50"
         }
       ],
-      "entregado": false,
+      "entregado": true,
       "id": 4
     },
     {
@@ -79,7 +66,7 @@
           "price": "150"
         }
       ],
-      "entregado": false,
+      "entregado": true,
       "id": 5
     },
     {
@@ -99,7 +86,7 @@
   "Clientes": [
     {
       "id": 1,
-      "name": "Rocio Dora",
+      "name": "Rocio Dorado",
       "dni": "43556565",
       "phoneNumber": "381555555",
       "instagramUser": "rodorado",

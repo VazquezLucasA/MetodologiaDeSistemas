@@ -16,31 +16,31 @@
 
 .nav{
   grid-area: nav;
-  /* background-color: #675b92; */
+  background-color: #675b92;
   justify-content: center;
   height: 100px;
 }
   
 .header{
     grid-area: header;
-    /* background-color: #06001b; */
+    background-color: #06001b;
   }
 
 .main{
     grid-area: main;
-    /* background-color: #dd1111; */
+    background-color: #dd1111;
     padding: auto;
   }
  
 .footer{
     grid-area: footer;
-    /* background-color: #5f5f5f;  */
+    background-color: #5f5f5f;
   }
 
 .ContenedorBotones{
   display: flex;
   width: 80%;
-  /* flex-direction: row; */
+  flex-direction: row;
   justify-content:space-evenly ;
 }
 
