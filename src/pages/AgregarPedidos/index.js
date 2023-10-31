@@ -1,8 +1,8 @@
 import React from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
-import CrudApp from "../../components/TablaProductos";
-import TablaPedidos from "../../components/TablaPedidos";
+// import CrudApp from "../../components/TablaProductos";
+// import TablaPedidos from "../../components/TablaPedidos";
 import PedidosAgregarComp from "../../components/PedidosAgregarComp";
 
 const AgregarPedidos = () => {
@@ -12,7 +12,7 @@ const AgregarPedidos = () => {
       <div className="header"></div>
       <div className="nav">
         <div className="ContenedorBotones">
-          <button
+          <button 
             className="BotonPrincipal"
             onClick={() => navigate(`/Clientes/`)}
           >

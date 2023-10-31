@@ -128,11 +128,11 @@ const TablaPedidos = () => {
                 {item.entregado ? "Entregado" : "Pendiente"}
               </td>
               <td>
-                <button onClick={() => handleEliminarPedido(item.id)}>
+                <button id="bt" onClick={() => handleEliminarPedido(item.id)}>
                   Eliminar
                 </button>
                 {!item.entregado && (
-                  <button onClick={() => handleMarcarEntregado(item.id)}>
+                  <button id="bt" onClick={() => handleMarcarEntregado(item.id)}>
                     Entregado
                   </button>
                 )}
@@ -142,7 +142,7 @@ const TablaPedidos = () => {
         </tbody>
       </table>
 
-      <button type="button" onClick={() => Navigate("/Pedidos/Agregar")}>
+      <button id="bt" type="button" onClick={() => Navigate("/Pedidos/Agregar")}>
         Agregar Pedidos
       </button>
     </div>

@@ -1,6 +1,6 @@
 .grid-layout{
   display: grid;
-  background-color:#322a32;
+  
   max-width: 100%;
   min-height: 100vh;
   margin:auto;
@@ -11,50 +11,53 @@
                         'main'
                         'footer';
   grid-template-columns: auto;
-  grid-template-rows: 10% 10% auto 10%;
+  grid-template-rows: 5% 10% auto 7%;
 }
 
 .nav{
   grid-area: nav;
-  background-color: #b29cbe;
-  /* background-color: #675b92; */
+  background-color: #3e2599;
   justify-content: center;
   height: 100px;
 }
   
 .header{
     grid-area: header;
-    background-color: #322a32
-    /* background-color: #06001b; */
+    background-color: #06001b;
   }
-
+/* cambiar main */
 .main{
     grid-area: main;
-    background-color: #1e171e;
-    /* background-color: #dd1111; */
-    padding: auto;
+    background-color: #56666b;
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 7px 4px rgba(44, 44, 44, 0.685);
   }
  
 .footer{
     grid-area: footer;
-    background-color: #1e132f;
-    /* background-color: #5f5f5f;  */
+    background-color: #2F394D;
   }
 
 .ContenedorBotones{
   display: flex;
   width: 80%;
-  /* flex-direction: row; */
+  flex-direction: row;
   justify-content:space-evenly ;
+  padding: 20px;
+  background-color: #3b2496;
 }
-
+h2{
+  color: aliceblue;
+}
 .BotonPrincipal{
-  color: black;
-  background-color: #897dbd;
-  background: rgba(215, 10, 10, 0);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgb(0, 0, 0);
+  border-radius: 20px;
+ transition: 0.1s ease-in;
+ background-color: #3b2496;
+ box-shadow: 4px 4px 7px 4px rgba(0,0,0,0.75);
+}
+.BotonPrincipal:hover{
+  padding-bottom: 4px;
+  background-color: #5440a1;
+  transition: 0.1s ease-in;
 }

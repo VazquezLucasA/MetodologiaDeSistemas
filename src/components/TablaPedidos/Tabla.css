@@ -1,12 +1,25 @@
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-td.entregado-verde {
-    background-color: green;
-}
-  
-td.entregado-rojo {
-    background-color: red;
-}
-  
+table {
+    padding: 2px;
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    
+    input{
+      border-radius: 5px;
+      margin: 3px;
+      padding: 4px;
+    }
+    #bt{
+      margin: 2px;
+      padding: 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #334474;
+      color: rgb(255, 255, 255);
+    }
+    #bt:hover{
+      border: none;
+      border-radius: 5px;
+      background-color: #324780;
+      color: rgb(255, 255, 255);
+    }

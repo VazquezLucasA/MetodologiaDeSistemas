@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.css';
 import {useNavigate} from 'react-router-dom';
-import CrudApp from '../../components/TablaProductos';
+// import CrudApp from '../../components/TablaProductos';
 import TablaPedidos from '../../components/TablaPedidos';
 
 

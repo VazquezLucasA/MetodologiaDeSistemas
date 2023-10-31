@@ -102,7 +102,7 @@ const TablaProducto = () => {
           value={formData.price}
           onChange={handleInputChange}
         />
-        <button type="submit">{formData.id ? "Modificar" : "Agregar"}</button>
+        <button id="bt" type="submit">{formData.id ? "Modificar" : "Agregar"}</button>
       </form>
 
       <table className="table">
@@ -130,7 +130,7 @@ const TablaProducto = () => {
           ))}
         </tbody>
       </table>
-      <button type="button" onClick={handleCancel}>
+      <button id="bt" type="button" onClick={handleCancel}>
         Cancelar
       </button>
     </div>

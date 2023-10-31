@@ -82,7 +82,7 @@ const PedidosAgregarComp = () => {
             </option>
           ))}
         </select>
-        <button onClick={handleAgregarProducto}>Agregar Producto</button>
+        <button id="bt" onClick={handleAgregarProducto}>Agregar Producto</button>
       </div>
       <div>
         <h3>Productos Agregados:</h3>
@@ -93,7 +93,7 @@ const PedidosAgregarComp = () => {
         </ul>
       </div>
       {mensaje && <p>{mensaje}</p>}
-      <button onClick={handleConfirmarPedido}>Confirmar Pedido</button>
+      <button id="bt" onClick={handleConfirmarPedido}>Confirmar Pedido</button>
     </div>
   );
 };

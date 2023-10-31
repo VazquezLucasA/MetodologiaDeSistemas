@@ -1,4 +1,30 @@
-table, th, td {
+table {
+  padding: 2px;
     border: 1px solid black;
     border-collapse: collapse;
+  }
+  label{
+    color: aliceblue;
+  }
+  input{
+    border-radius: 5px;
+    margin: 3px;
+    padding: 4px;
+  }
+  #bt{
+    margin: 2px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #334474;
+    color: rgb(255, 255, 255);
+  }
+  #bt:hover{
+    border: none;
+    border-radius: 5px;
+    background-color: #324780;
+    color: rgb(255, 255, 255);
+  }
+  option{
+    border-radius: 5px;
   }
