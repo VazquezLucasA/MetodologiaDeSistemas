@@ -81,6 +81,38 @@
       ],
       "entregado": true,
       "id": 6
+    },
+    {
+      "clienteId": 3,
+      "productos": [
+        {
+          "id": 3,
+          "name": "SET JK Golden con POB",
+          "detalles": "SET 4 version completo",
+          "price": "85000"
+        }
+      ],
+      "entregado": false,
+      "id": 7
+    },
+    {
+      "clienteId": 4,
+      "productos": [
+        {
+          "id": 1,
+          "name": "Album V Layover Random",
+          "detalles": "Random",
+          "price": "25000"
+        },
+        {
+          "id": 2,
+          "name": "Album JK Golden Random",
+          "detalles": "Random",
+          "price": "30000"
+        }
+      ],
+      "entregado": true,
+      "id": 8
     }
   ],
   "Clientes": [

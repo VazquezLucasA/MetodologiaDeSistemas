@@ -27,18 +27,29 @@ const PedidosAgregarComp = () => {
   };
 
   const handleAgregarProducto = () => {
-    if (clienteSeleccionado && productoSeleccionado) {
+    if (!clienteSeleccionado) {
+      setMensaje("Por favor, selecciona un cliente.");
+    } else if (!productoSeleccionado) {
+      setMensaje("Por favor, selecciona un producto.");
+    } else {
       const producto = productos.find(
         (prod) => prod.id === parseInt(productoSeleccionado)
       );
       setProductosAgregados([...productosAgregados, producto]);
       setProductoSeleccionado("");
-    } else {
-      setMensaje("Por favor, selecciona un cliente y un producto.");
+      setMensaje(""); // Borra el mensaje de error si todo está bien
     }
   };
 
   const handleConfirmarPedido = async () => {
+    if (!clienteSeleccionado) {
+      setMensaje("Por favor, selecciona un cliente.");
+      return;
+    } else if (productosAgregados.length === 0) {
+      setMensaje("Por favor, agrega al menos un producto.");
+      return;
+    }
+
     try {
       await axios.post("http://localhost:3000/Pedidos/", {
         clienteId: parseInt(clienteSeleccionado),

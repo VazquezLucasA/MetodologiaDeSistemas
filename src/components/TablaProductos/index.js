@@ -87,6 +87,7 @@ const TablaProducto = () => {
           placeholder="Nombre"
           value={formData.name}
           onChange={handleInputChange}
+          required
         />
         <input
           type="text"
@@ -94,6 +95,7 @@ const TablaProducto = () => {
           placeholder="detalles"
           value={formData.detalles}
           onChange={handleInputChange}
+          required
         />
         <input
           type="text"
@@ -101,6 +103,7 @@ const TablaProducto = () => {
           placeholder="precio"
           value={formData.price}
           onChange={handleInputChange}
+          required
         />
         <button id="bt" type="submit">{formData.id ? "Modificar" : "Agregar"}</button>
       </form>

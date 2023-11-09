@@ -95,6 +95,7 @@ const TablaClientes = () => {
           placeholder="Nombre"
           value={formData.name}
           onChange={handleInputChange}
+          required
         />
         <input
           type="text"
@@ -102,6 +103,7 @@ const TablaClientes = () => {
           placeholder="DNI"
           value={formData.dni}
           onChange={handleInputChange}
+          required
         />
         <input
           type="text"
@@ -109,6 +111,7 @@ const TablaClientes = () => {
           placeholder="Número de teléfono"
           value={formData.phoneNumber}
           onChange={handleInputChange}
+          required
         />
         <input
           type="text"
@@ -116,6 +119,7 @@ const TablaClientes = () => {
           placeholder="Usuario de Instagram"
           value={formData.instagramUser}
           onChange={handleInputChange}
+          required
         />
         <input
           type="text"
@@ -123,6 +127,7 @@ const TablaClientes = () => {
           placeholder="Dirección"
           value={formData.address}
           onChange={handleInputChange}
+          required
         />
         <button id="bt" type="submit">{formData.id ? "Modificar" : "Agregar"}</button>
       </form>
